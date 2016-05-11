@@ -1,0 +1,36 @@
+use store
+
+db.book.insert(
+{
+   title: 'MongoDB Overview', 
+   description: 'MongoDB is no sql database',
+   by_user: 'tutorials point',
+   url: 'http://www.tutorialspoint.com',
+   tags: ['mongodb', 'database', 'NoSQL'],
+   likes: 100
+}
+)
+
+db.book.insert(
+{
+   title: 'NoSQL Overview', 
+   description: 'No sql database is very fast',
+   by_user: 'tutorials point',
+   url: 'http://www.tutorialspoint.com',
+   tags: ['mongodb', 'database', 'NoSQL'],
+   likes: 10
+}
+)
+
+db.book.insert(
+{
+   title: 'Neo4j Overview', 
+   description: 'Neo4j is no sql database',
+   by_user: 'Neo4j',
+   url: 'http://www.neo4j.com',
+   tags: ['neo4j', 'database', 'NoSQL'],
+   likes: 750
+}
+)
+
+db.book.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : 1}}}])

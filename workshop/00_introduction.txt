@@ -1,0 +1,74 @@
+$mongod --dbpath d:\mongodb\data
+
+>help
+>use book
+>db.dropDatabase()
+>show dbs
+>db.book.insert(
+{
+    "name": "Book 01",
+    "page": 250
+}
+)
+
+>db.book.insert(
+{
+    "name": "Book 02",
+    "page": 200
+}
+)
+
+>db.book.insert(
+{
+    "name": "Book 03",
+    "page": 400
+}
+)
+
+>db.book.find()
+>db.book.find( {"name": "Book 01"} )
+>db.book.find( {"name": "Book 01"} ).count()
+>db.book.find( {"page":{ $gt: 200} } )
+>db.book.find( {"page":{ $lt: 250} } )
+>db.book.find().sort({"page": 1})
+>db.book.find().sort({"page": -1})
+>db.book.update(
+    { "name" : "Book 01" },
+    {
+      $set: { "author": "Somkiat" },
+      $currentDate: { "lastModified": true }
+    }
+)
+
+>db.book.update(
+    {"page": { $gt: 200 }},
+    {
+      $set: { "author": "New" },
+      $currentDate: { "lastModified": true }
+    },
+    { multi: true}
+)
+
+>db.book.update(
+    { "name" : "Book 01" },
+    {
+      "name": "Update book 01",
+      "page": 500
+    }
+)
+
+>db.book.remove({})
+>db.book.remove({"name": "Book 02"})
+>db.book.remove( { }, { justOne: true })
+
+>db.book.drop()
+
+
+
+
+
+
+
+
+
+
