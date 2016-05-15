@@ -76,6 +76,26 @@ db.person.insert(
 )
 
 
+//Create multiple docs with Bulk
+var bulk = db.person.initializeUnorderedBulkOp()
+
+var bulk = db.person.initializeOrderedBulkOp()
+
+bulk.insert( { _id: 1, name: "people 1"} )
+bulk.insert( { _id: 2, name: "people 2"} )
+bulk.insert( { _id: 3, name: "people 3"} )
+
+bulk.execute()
 
 
+//Multiple operation with bulk => insert, update, delete
+var bulk = db.users.initializeOrderedBulkOp()
+
+bulk.insert( { user: "somkiat", status: "A", points: 0 } )
+bulk.insert( { user: "up1", status: "A", points: 0 } )
+bulk.insert( { user: "pui", status: "P", points: 0 } )
+bulk.find( { status: "D" } ).remove()
+bulk.find( { status: "P" } ).update( { $set: { comment: "Pending" } } )
+
+bulk.execute()
 
