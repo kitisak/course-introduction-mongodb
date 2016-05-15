@@ -1,0 +1,81 @@
+use person
+
+#Create data
+db.person.insert(
+{
+    "name": "somkiat",
+    "age": 35,
+    "status": "A",
+    "groups": [ "news", "sport" ]
+}
+)
+
+
+#Query data
+db.person.find()
+db.person.find().pretty()
+
+#Array of documents
+var datas = 
+[
+    {
+        "name": "somkiat",
+        "age": 35,
+        "status": "A",
+        "groups": [ "news", "sport" ]
+    },
+    {
+        "name": "other",
+        "age": 40,
+        "status": "A",
+        "groups": [ "news", "sport" ]
+    }
+]
+
+db.person.insert(datas)
+
+#Insert existing document
+db.person.insert(
+{
+    "_id": ObjectId("573825f86bed005acccb5113"),
+    "name": "somkiat",
+    "age": 35,
+    "status": "A",
+    "groups": [ "news", "sport" ]
+}
+)
+
+#Insert in unordered
+#With unordered inserts, if an error occurs during an insert of #one of the documents
+
+db.person.insert(
+   [
+     { _id: 1, name: "people 1"},
+     { _id: 2, name: "people 2"},
+     { _id: 3, name: "people 3"}
+   ],
+   { ordered: false }
+)
+
+db.person.insert(
+   [
+     { _id: 1, name: "people 1"},
+     { _id: 4, name: "people 4"},
+     { _id: 3, name: "people 3"}
+   ],
+   { ordered: false }
+)
+
+db.person.insert(
+   [
+     { _id: 1, name: "people 1"},
+     { _id: 5, name: "people 5"},
+     { _id: 3, name: "people 3"}
+   ],
+   { ordered: true }
+)
+
+
+
+
+
