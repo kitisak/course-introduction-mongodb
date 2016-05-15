@@ -1,5 +1,5 @@
 #Import data
-mongoimport -d web -c website --file website/data.json
+$mongoimport -d web -c website --file website/data.json
 
 #Basic command
 mongo
@@ -51,10 +51,26 @@ db.my_data.insert( results.toArray() )
 
 
 3. Export data to CSV/JSON with mongoexport
-mongoexport -d web -c my_data -f _id,total -o group.csv --csv
+$mongoexport -d web -c my_data -f _id,total -o group.csv --csv
 
-mongoexport -d web -c my_data -f _id,total -o group.json
+$mongoexport -d web -c my_data -f _id,total -o group.json
 
+
+
+#Large sort operation !!!
+https://docs.mongodb.com/manual/core/aggregation-pipeline-limits/#agg-memory-restrictions
+
+In-memory sorting have a limit of 100MB
+Need enable allowDiskUse: true
+
+db.website.aggregate( 
+[
+    { $match: { "hosting": "aws.amazon.com" }}, 
+    { $group: { _id: "$hosting", total: { $sum: 1 } } } ,
+    { $sort: {total: -1} }
+],
+    {allowDiskUse: true}
+)
 
 
 
