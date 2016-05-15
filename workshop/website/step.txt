@@ -15,7 +15,8 @@ db.website.find()
 #Grouping data by hosting
 db.website.aggregate( { $group: { _id: "$hosting" } } )
 
-db.website.aggregate( { $group: { _id: "$hosting", total: {$sum:1} } } )
+db.website.aggregate( 
+{ $group: { _id: "$hosting", total: {$sum:1} } } )
 
 #With sorting
 db.website.aggregate( 
@@ -60,6 +61,8 @@ $mongoexport -d web -c my_data -f _id,total -o group.json
 #Large sort operation !!!
 https://docs.mongodb.com/manual/core/aggregation-pipeline-limits/#agg-memory-restrictions
 
+https://docs.mongodb.com/manual/reference/operator/aggregation/sort/#sort-memory-limit
+
 In-memory sorting have a limit of 100MB
 Need enable allowDiskUse: true
 
@@ -71,11 +74,3 @@ db.website.aggregate(
 ],
     {allowDiskUse: true}
 )
-
-
-
-
-
-
-
-
