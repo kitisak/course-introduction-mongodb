@@ -13,6 +13,18 @@ post =
 
 db.posts.insert(post)
 
+var post2 =
+{    _id: "2",  
+     topic: "Hello my blog",
+     text: "this is my first blog",
+     tag: [ "intro", "mongodb" ],
+     author: "somkiat",
+     date: new Date()
+}
+
+db.posts.insert(post2)
+
+
 //Find data
 db.posts.find()
 db.posts.find().pretty()
