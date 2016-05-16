@@ -1,0 +1,38 @@
+>use blog
+>db.dropDatabase()
+
+#Import data
+$mongoimport -d blog -c post --file data.json
+
+#query data by conditions
+>db.post.find({categories: "cat02"})
+
+#explain query
+>db.post.find({categories: "cat02"}).explain()
+>db.post.find({categories: "cat02"}).explain("executionStats")
+
+#Add indexing
+>db.post.createIndex({categories: 1})
+
+#Drop index
+>db.post.dropIndex({categories: 1})
+
+#Soring
+>db.post.find().sort({page:-1}).explain()
+
+#Add index
+>db.post.createIndex({page: -1})
+
+#Drop index
+>db.post.dropIndex({page: -1})
+
+
+#Multiple field of index
+>db.post.find({categories: "cat02"}).sort({page:-1}).explain()
+
+#Add index
+>db.post.createIndex({categories: 1, page: -1})
+
+#List of indexes by collection
+>db.post.getIndexes()
+

@@ -1,0 +1,6 @@
+{ "_id" : 1, "topic" : "topic 01", "categories" : ["cat01", "cat02"], "view": 10 }
+{ "_id" : 2, "topic" : "topic 02", "categories" : ["cat02", "cat03"], "view": 20 }
+{ "_id" : 3, "topic" : "topic 03", "categories" : ["cat01", "cat02"], "view": 30 }
+{ "_id" : 4, "topic" : "topic 04", "categories" : ["cat02", "cat03"], "view": 40 }
+{ "_id" : 5, "topic" : "topic 05", "categories" : ["cat04", "cat05"], "view": 50 }
+{ "_id" : 6, "topic" : "topic 06", "categories" : ["cat01", "cat02"], "view": 60 }
