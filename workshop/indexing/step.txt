@@ -36,3 +36,10 @@ $mongoimport -d blog -c post --file data.json
 #List of indexes by collection
 >db.post.getIndexes()
 
+#Control index with hint()
+>db.post.find({categories: "cat02"}).sort({page:-1}).hint( { page: -1 } ).explain()
+
+#Ignore all indexes
+>db.post.find({categories: "cat02"}).sort({page:-1}).hint( { $natural: 1 } ).explain()
+
+
