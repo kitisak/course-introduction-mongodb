@@ -42,4 +42,10 @@ $mongoimport -d blog -c post --file data.json
 #Ignore all indexes
 >db.post.find({categories: "cat02"}).sort({page:-1}).hint( { $natural: 1 } ).explain()
 
+#Get size of indexes in each collection  (byte)
+>db.post.totalIndexSize()
+
+#Stat of collection
+>db.post.stats()
+
 
