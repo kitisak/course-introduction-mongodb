@@ -1,0 +1,82 @@
+db.topic.insert(
+{
+    "title": "Post 01",
+    "content": "Content 01",
+    "tags" : [
+        {
+            "name": "tag01"
+        },
+        {
+            "name": "tag02"
+        }
+    ]
+}
+)
+
+db.topic.update(
+   { _id: ObjectId("573bf4408a2743b0ab392f36") },
+   { $addToSet: { 
+        tags: { $each: [ 
+            {
+                "name": "tag03"
+            },
+            {
+                "name": "tag02"
+            },
+            {
+                "name": "tag05"
+            }
+        ]
+    } } }
+ )
+
+ db.topic.update(
+   { _id: ObjectId("573bf4408a2743b0ab392f36") },
+   { $pull: { 
+        tags: { 
+            $in: [ 
+                {
+                "name": "tag03"
+                }
+            ] 
+    } } }
+ )
+
+db.tags.insert(
+{
+    "name": "tag01"
+}
+)
+
+db.tags.insert(
+[
+    { "name": "tag01"},
+    { "name": "tag02"}
+]
+)
+
+var bulk = db.topic.initializeOrderedBulkOp();
+bulk.find({ _id: ObjectId("573bf4408a2743b0ab392f36") }).updateOne({$unset: {tags:1}})
+bulk.find({ _id: ObjectId("573bf4408a2743b0ab392f36") }).updateOne({ "$addToSet": { "tags":  { "name": "new01" } } })
+bulk.execute();
+
+
+var bulk = db.topic.initializeOrderedBulkOp();
+bulk.find({ _id: ObjectId("573bf4408a2743b0ab392f36") }).updateOne( {$unset: {tags:1}} );
+bulk.find({ _id: ObjectId("573bf4408a2743b0ab392f36") }).updateOne({ $addToSet: { 
+        tags: { $each: [ 
+            {
+                "name": "tag03"
+            },
+            {
+                "name": "tag02"
+            },
+            {
+                "name": "tag05"
+            }
+        ]
+    } } });
+bulk.execute();
+
+
+
