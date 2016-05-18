@@ -1,0 +1,54 @@
+#Default :: no authentication
+$mongod
+$mongod --noauth
+
+#Start with authentication
+$mongod --auth
+
+
+#Connect to MongoDB with Admin
+$mongo --port 27017 -u myadmin -p 123456 --authenticationDatabase admin
+
+$mongo --port 27017 -u blogAdmin -p 123456 --authenticationDatabase blog
+
+
+#1. create admin user for db=admin
+$mongo
+>use admin
+>db.createUser(
+  {
+    user: "myadmin",
+    pwd: "123456",
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+  }
+)
+
+#2 create admin per database
+>use blog
+>db.createUser(
+  {
+    user: "blogAdmin",
+    pwd: "123456",
+    roles: [ { role: "userAdmin", db: "blog" } ]
+  }
+)
+
+#3 create user with role=readWrite
+>use blog
+>db.createUser(
+  {
+    user: "blogUser",
+    pwd: "123456",
+    roles: [ { role: "readWrite", db: "blog" } ]
+  }
+)
+
+#3 create user with role=readWrite
+>use blog
+>db.createUser(
+  {
+    user: "blogReadUser",
+    pwd: "123456",
+    roles: [ { role: "read", db: "blog" } ]
+  }
+)
