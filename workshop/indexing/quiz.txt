@@ -1,0 +1,22 @@
+>use sample
+>var someStuff = ""
+  someStuff = someStuff.pad(1000)
+  for (i=0;i<100;i++) {
+    for (j=0;j<10;j++) {
+      for (k=0;k<32;k++) {
+        db.data.insert({a:i, b:j, c:k, d:someStuff})
+      }
+    }
+  }
+
+
+>db.data.find().explain()
+
+>db.data.getIndexes()
+
+>db.data.find({b:4}).explain()
+
+>db.data.find({b:4}).explain("executionStats")
+
+>db.data.find({b:4},{_id:0,c:1}).explain("executionStats")
+
